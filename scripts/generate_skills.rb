@@ -172,21 +172,7 @@ def generate_index_skill(cleaner)
   refs_dir = File.join(skill_dir, "references")
   FileUtils.mkdir_p(refs_dir)
 
-  # Build component directory table
-  rows = COMPONENTS.map do |name, config|
-    source_path = File.join(SOURCE_BASE, config[:source])
-    next unless File.exist?(source_path)
-
-    result = cleaner.clean_file(source_path)
-    category = config[:source].split("/").first.capitalize
-    "| #{result[:title]} | #{category} | `#{name}` | #{result[:description][0..80]}... |"
-  end.compact
-
-  table = "| Component | Category | Skill | Description |\n" \
-          "|-----------|----------|-------|-------------|\n" \
-          "#{rows.join("\n")}"
-
-  # Clean customization docs into references
+  # Clean customization docs into references (always regenerated)
   customize_docs = Dir.glob(File.join(SOURCE_BASE, "customize", "*.md")).reject { |f| f.include?("_index") }
   customize_docs.each do |doc_path|
     result = cleaner.clean_file(doc_path)
@@ -194,41 +180,53 @@ def generate_index_skill(cleaner)
     File.write(File.join(refs_dir, "#{basename}.md"), result[:content])
   end
 
-  customize_list = customize_docs.map do |doc_path|
-    basename = File.basename(doc_path, ".md")
-    "- `references/#{basename}.md`"
-  end.join("\n")
+  skill_md_path = File.join(skill_dir, "SKILL.md")
+  if File.exist?(skill_md_path)
+    puts "  Updated references for index skill (SKILL.md preserved)"
+  else
+    # Generate a default SKILL.md only if one doesn't exist
+    rows = COMPONENTS.map do |name, config|
+      source_path = File.join(SOURCE_BASE, config[:source])
+      next unless File.exist?(source_path)
 
-  skill_md = <<~SKILL
-    ---
-    name: flowbite
-    description: "Flowbite UI component library index and overview. Use this skill to discover available Flowbite components, understand Flowbite conventions (data attributes, dark mode, Tailwind CSS patterns), and access customization docs (theming, colors, icons, RTL). This skill should be used when the user asks about Flowbite in general, wants to know which components are available, or needs guidance on theming and customization."
-    ---
+      result = cleaner.clean_file(source_path)
+      category = config[:source].split("/").first.capitalize
+      "| #{result[:title]} | #{category} | `#{name}` | #{result[:description][0..80]}... |"
+    end.compact
 
-    # Flowbite
+    table = "| Component | Category | Skill | Description |\n" \
+            "|-----------|----------|-------|-------------|\n" \
+            "#{rows.join("\n")}"
 
-    Flowbite is a free and open-source UI component library built on top of Tailwind CSS. It provides ready-to-use HTML components with data attributes to enable interactive elements for building modern, responsive websites.
+    customize_list = customize_docs.map do |doc_path|
+      basename = File.basename(doc_path, ".md")
+      "- `references/#{basename}.md`"
+    end.join("\n")
 
-    ## Key Concepts
+    skill_md = <<~SKILL
+      ---
+      name: flowbite
+      description: "Flowbite UI component library index and overview. Use this skill to discover available Flowbite components, understand Flowbite conventions (data attributes, dark mode, Tailwind CSS patterns), and access customization docs (theming, colors, icons, RTL). This skill should be used when the user asks about Flowbite in general, wants to know which components are available, or needs guidance on theming and customization."
+      ---
 
-    - **Tailwind CSS based**: All components use Tailwind utility classes for styling
-    - **Data attributes**: Interactive components use `data-*` attributes (e.g., `data-modal-toggle`, `data-dropdown-toggle`) — no manual JS initialization needed
-    - **Dark mode**: Components support dark mode via Tailwind's `dark:` prefix
-    - **Responsive**: Components are mobile-first and responsive by default
+      # Flowbite
 
-    ## Component Directory
+      Flowbite is a free and open-source UI component library built on top of Tailwind CSS. It provides ready-to-use HTML components with data attributes to enable interactive elements for building modern, responsive websites.
 
-    #{table}
+      ## Component Directory
 
-    ## Customization References
+      #{table}
 
-    For theming, dark mode, colors, icons, and RTL configuration:
+      ## Customization References
 
-    #{customize_list}
-  SKILL
+      For theming, dark mode, colors, icons, and RTL configuration:
 
-  File.write(File.join(skill_dir, "SKILL.md"), skill_md)
-  puts "  Generated index skill: flowbite/"
+      #{customize_list}
+    SKILL
+
+    File.write(skill_md_path, skill_md)
+    puts "  Generated index skill: flowbite/"
+  end
 end
 
 # --- Main ---

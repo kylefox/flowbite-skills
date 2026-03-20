@@ -7,35 +7,75 @@ description: "Flowbite UI component library index and overview. Use this skill t
 
 Flowbite is a free and open-source UI component library built on top of Tailwind CSS. It provides ready-to-use HTML components with data attributes to enable interactive elements for building modern, responsive websites.
 
-## Prerequisites
+## Prerequisites — Verify Before Outputting Component Code
 
-Before outputting any Flowbite component code, verify the project has Flowbite configured. Check for the Flowbite plugin in the project's Tailwind CSS config (usually `tailwind.config.js`, `tailwind.config.ts`, or a `@plugin` directive in the main CSS file).
+Before generating any Flowbite component markup, check the project's setup. Flowbite v4 components use semantic theme classes (`bg-neutral-primary`, `text-heading`, `border-default`, `bg-brand`, `rounded-base`) that **produce no styles** unless the Flowbite plugin and a theme are configured.
 
-**What to look for:**
+### Step 1: Find the CSS entry point
 
-Tailwind CSS v4 (CSS-based config):
+Look for the main CSS file that Tailwind compiles. Common locations:
+- `input.css`, `main.css`, `app.css`, `globals.css`
+- `src/app/globals.css` (Next.js)
+- `app/assets/stylesheets/application.tailwind.css` (Rails)
+
+### Step 2: Check for the required directives
+
+The CSS entry point must contain all of these for Flowbite v4:
+
 ```css
+@import "tailwindcss";
 @plugin "flowbite/plugin";
+@source "../node_modules/flowbite";
 ```
 
-Tailwind CSS v3 (JS-based config):
-```js
-plugins: [require('flowbite/plugin')]
+For **Tailwind v3** projects (uses `tailwind.config.js` instead of CSS directives), check the JS config for `require('flowbite/plugin')` in the plugins array and `'./node_modules/flowbite/**/*.js'` in the content array.
+
+### Step 3: Check for a theme
+
+This is critical. Without a theme, semantic classes like `bg-brand`, `text-heading`, `bg-neutral-primary-soft` are undefined. Check for EITHER:
+
+**A built-in theme import** (one of: default, minimal, enterprise, playful, mono):
+```css
+@import "flowbite/src/themes/default";
 ```
 
-**If Flowbite is not configured**, guide the user through setup before outputting component code:
-1. Install: `npm install flowbite`
-2. Add the plugin to their Tailwind config (see above)
-3. For interactive components, include the JS: add `<script src="../path/to/flowbite/dist/flowbite.min.js"></script>` or `import 'flowbite';` in their entry point
+**OR custom theme variables** in a `@theme {}` block that defines at minimum the brand, neutral, and text color variables. See `references/variables.md` for the full variable list.
 
-**Why this matters:** Flowbite v4 uses semantic theme classes (`bg-neutral-primary`, `text-heading`, `border-default`, `bg-brand`, `rounded-base`, etc.) that only resolve when the Flowbite plugin is active. Without it, these classes produce no styles.
+### Step 4: Dark mode (if needed)
+
+For dark mode support, check for:
+```css
+@custom-variant dark (&:where(.dark, .dark *));
+```
+
+### Step 5: JavaScript (for interactive components)
+
+Components like modals, dropdowns, tabs, tooltips, and drawers need Flowbite's JavaScript. Check for:
+- `import 'flowbite';` in the JS/TS entry point, OR
+- `<script src="../path/to/flowbite/dist/flowbite.min.js"></script>` in HTML
+
+### If setup is missing
+
+Guide the user through the minimal setup:
+
+1. `npm install flowbite`
+2. Add to the CSS entry point:
+```css
+@import "tailwindcss";
+@import "flowbite/src/themes/default";
+@plugin "flowbite/plugin";
+@source "../node_modules/flowbite";
+@custom-variant dark (&:where(.dark, .dark *));
+```
+3. For interactive components, add `import 'flowbite';` to the JS entry point.
 
 ## Key Concepts
 
 - **Tailwind CSS based**: All components use Tailwind utility classes for styling
-- **Semantic theme classes**: Flowbite v4 uses semantic tokens (`text-heading`, `bg-brand`, `border-default`) instead of raw Tailwind colors (`text-gray-900`, `bg-blue-700`)
+- **Semantic theme classes**: Flowbite v4 uses semantic tokens (`text-heading`, `bg-brand`, `border-default`, `rounded-base`) instead of raw Tailwind colors — these require the Flowbite plugin + a theme
+- **5 built-in themes**: default, minimal, enterprise, playful, mono — each sets all required color/font/radius variables
 - **Data attributes**: Interactive components use `data-*` attributes (e.g., `data-modal-toggle`, `data-dropdown-toggle`) — no manual JS initialization needed
-- **Dark mode**: Components support dark mode via Tailwind's `dark:` prefix and semantic tokens automatically adapt
+- **Dark mode**: Semantic tokens automatically adapt to dark mode when `@custom-variant dark` is configured
 - **Responsive**: Components are mobile-first and responsive by default
 
 ## Component Directory

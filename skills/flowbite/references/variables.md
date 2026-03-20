@@ -29,6 +29,7 @@ Here's the full list of the brand variables:
 
 This is the full list of color variables that are used for text colors:
 
+```css
 @import "tailwindcss";
 
 @plugin "flowbite/plugin";
@@ -62,11 +63,13 @@ This is the full list of color variables that are used for text colors:
     --color-fg-pink: var(--color-pink-600);
     --color-fg-lime: var(--color-lime-600);
 }
+```
 
 ## Background color variables
 
 Use these variables to set the colors for the background of elements:
 
+```css
 @import "tailwindcss";
 
 @plugin "flowbite/plugin";
@@ -124,11 +127,13 @@ Use these variables to set the colors for the background of elements:
     --color-indigo: var(--color-indigo-600);
     --color-orange: var(--color-orange-400);
 }
+```
 
 ## Border color variables
 
 Use these variables to set the colors for the border of elements:
 
+```css
 @import "tailwindcss";
 
 @plugin "flowbite/plugin";
@@ -157,11 +162,13 @@ Use these variables to set the colors for the border of elements:
     --color-dark-subtle: var(--color-gray-800);
     --color-dark-backdrop: var(--color-gray-950);
 }
+```
 
 ## Font family variables
 
 Use these variables to set the font families for the text of elements:
 
+```css
 @import "tailwindcss";
 
 @plugin "flowbite/plugin";
@@ -172,11 +179,13 @@ Use these variables to set the font families for the text of elements:
     --font-body: 'Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'system-ui', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'sans-serif', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
     --font-mono: 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', 'monospace';
 }
+```
 
 ## Border radius variables
 
 Use these variables to set the border radius of elements:
 
+```css
 @import "tailwindcss";
 
 @plugin "flowbite/plugin";
@@ -192,3 +201,4 @@ Use these variables to set the border radius of elements:
     --radius-base: 12px;
     --radius-lg: 16px;
 }
+```

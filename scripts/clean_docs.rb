@@ -63,9 +63,15 @@ class CleanDocs
   def clean_body(body)
     text = body.dup
 
-    # Strip Hugo example shortcodes — keep inner HTML
+    # Strip Hugo example shortcodes — keep inner HTML as html code blocks
     text.gsub!(/\{\{<\s*example[^>]*>\}\}\s*\n?/, "```html\n")
     text.gsub!(/\{\{<\s*\/example\s*>\}\}\s*\n?/, "```\n\n")
+
+    # Strip Hugo code shortcodes — extract lang attribute for fenced code blocks
+    text.gsub!(/\{\{<\s*code\s+(?:[^>]*?)lang="([^"]*)"[^>]*>\}\}\s*\n?/) { "```#{$1}\n" }
+    # Fallback for code shortcodes without lang attribute
+    text.gsub!(/\{\{<\s*code[^>]*>\}\}\s*\n?/, "```\n")
+    text.gsub!(/\{\{<\s*\/code\s*>\}\}\s*\n?/, "```\n\n")
 
     # Replace {{< param homepage >}} with actual URL
     text.gsub!(/\{\{<\s*param\s+homepage\s*>\}\}/, "https://flowbite.com")

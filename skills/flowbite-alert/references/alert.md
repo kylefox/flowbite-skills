@@ -621,6 +621,7 @@ Check out the following JavaScript example to learn how to initialize, set the o
 
 First of all, you should set the required target element and optionally set a trigger element which will dismiss the target element when clicked and other options to customize the animation.
 
+```javascript
 // target element that will be dismissed
 const $targetEl = document.getElementById('targetElement');
 
@@ -645,9 +646,11 @@ const instanceOptions = {
   id: 'targetElement',
   override: true
 };
+```
 
 Create a new Dismiss object based on the options set above.
 
+```javascript
 import { Dismiss } from 'flowbite';
 
 /*
@@ -657,21 +660,26 @@ import { Dismiss } from 'flowbite';
 * instanceOptions (optional)
 */
 const dismiss = new Dismiss($targetEl, $triggerEl, options, instanceOptions);
+```
 
 You can now use the methods on the Dismiss object.
 
+```javascript
 // hide the target element
 dismiss.hide();
+```
 
 ### HTML Markup
 
 Use this HTML code for the JavaScript code example above.
 
+```html
 <button id="triggerElement" type="button" class="text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">Hide alert</button>
 
 <div id="targetElement" class="p-4 mb-4 text-sm text-fg-brand-strong rounded-base bg-brand-softer" role="alert">
   <span class="font-medium">Info alert!</span> Change a few things up and try submitting again.
 </div>
+```
 
 ### TypeScript
 
@@ -679,6 +687,7 @@ If you're using the <a href="/docs/getting-started/typescript">TypeScript config
 
 Here's an example that applies the types from Flowbite to the code above:
 
+```typescript
 import { Dismiss } from "flowbite";
 import type { DismissOptions, DismissInterface } from "flowbite";
 import type { InstanceOptions } from 'flowbite';
@@ -718,3 +727,4 @@ const dismiss: DismissInterface = new Dismiss($targetEl, $triggerEl, options, in
 
 // programmatically hide it
 dismiss.hide();
+```

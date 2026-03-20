@@ -1761,6 +1761,7 @@ First of all, you need to set the main target element which will be the dropdown
 
 After that, you can also optionally set an options object to set the placement of the dropdown menu and callback functions.
 
+```javascript
 // set the dropdown menu element
 const $targetEl = document.getElementById('dropdownMenu');
 
@@ -1791,9 +1792,11 @@ const instanceOptions = {
   id: 'dropdownMenu',
   override: true
 };
+```
 
 Create a new Dropdown object based on the options above.
 
+```javascript
 import { Dropdown } from 'flowbite';
 
 /*
@@ -1803,9 +1806,11 @@ import { Dropdown } from 'flowbite';
  * instanceOptions: optional
  */
 const dropdown = new Dropdown($targetEl, $triggerEl, options, instanceOptions);
+```
 
 Use the `show` and `hide` methods on the Dropdown object to programmatically show or hide the dropdown menu directly from JavaScript.
 
+```javascript
 // show the dropdown menu
 dropdown.show();
 
@@ -1817,11 +1822,13 @@ dropdown.toggle();
 
 // check if dropdown is visible/open
 dropdown.isVisible();
+```
 
 ### HTML Markup
 
 Use the following HTML code for the JavaScript example above.
 
+```html
 <button id="dropdownButton" data-dropdown-toggle="dropdown" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-base text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">Dropdown button <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
 </svg>
@@ -1844,6 +1851,7 @@ Use the following HTML code for the JavaScript example above.
       </li>
     </ul>
 </div>
+```
 
 ### TypeScript
 
@@ -1851,6 +1859,7 @@ If you're using the <a href="/docs/getting-started/typescript">TypeScript config
 
 Here's an example that applies the types from Flowbite to the code above:
 
+```typescript
 import { Dropdown } from 'flowbite';
 import type { DropdownOptions, DropdownInterface } from 'flowbite';
 import type { InstanceOptions } from 'flowbite';
@@ -1900,3 +1909,4 @@ const dropdown: DropdownInterface = new Dropdown(
 
 // show the dropdown
 dropdown.show();
+```

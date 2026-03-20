@@ -1091,6 +1091,7 @@ Check out the following JavaScript example to learn how to initialize, set the o
 
 First of all, create a new JavaScript element object for the first parameter of the Modal object and another options object to set the placement, backdrop styles, and callback functions.
 
+```javascript
 // set the modal menu element
 const $targetEl = document.getElementById('modalEl');
 
@@ -1117,9 +1118,11 @@ const instanceOptions = {
   id: 'modalEl',
   override: true
 };
+```
 
 Create a new Modal object based on the options above.
 
+```javascript
 import { Modal } from 'flowbite';
 
 /*
@@ -1127,32 +1130,40 @@ import { Modal } from 'flowbite';
  * options: optional
  */
 const modal = new Modal($targetEl, options, instanceOptions);
+```
 
 Use the `show` and `hide` methods to show and hide the modal component directly from JavaScript.
 
+```javascript
 // show the modal
 modal.show();
 
 // hide the modal
 modal.hide();
+```
 
 Use the `toggle` method to toggle the visibility of the modal.
 
+```javascript
 // toggle the modal
 modal.toggle();
+```
 
 Use the `isHidden` or `isVisible` method to check if the modal is visible or not.
 
+```javascript
 // true if hidden
 modal.isHidden();
 
 // true if visible
 modal.isVisible();
+```
 
 ### HTML Markup
 
 Use the following HTML code for the JavaScript example above.
 
+```html
 <div
     id="modalEl"
     tabindex="-1"
@@ -1234,6 +1245,7 @@ Use the following HTML code for the JavaScript example above.
         </div>
     </div>
 </div>
+```
 
 ### TypeScript
 
@@ -1241,6 +1253,7 @@ If you're using the <a href="/docs/getting-started/typescript">TypeScript config
 
 Here's an example that applies the types from Flowbite to the code above:
 
+```typescript
 import { Modal } from 'flowbite';
 import type { ModalOptions, ModalInterface } from 'flowbite';
 import type { InstanceOptions } from 'flowbite';
@@ -1273,3 +1286,4 @@ const instanceOptions: InstanceOptions = {
 const modal: ModalInterface = new Modal($modalElement, modalOptions, instanceOptions);
 
 modal.show();
+```

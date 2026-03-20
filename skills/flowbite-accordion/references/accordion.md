@@ -642,6 +642,7 @@ To get started you need to create an array of accordion item objects including a
 
 Additionally, you can also set some options to change the default behaviour of the accordion, customize the styles, and set callback functions.
 
+```javascript
 const accordionElement = document.getElementById('accordion-example');
 
 // create an array of objects with the id, trigger element (eg. button), and the content element
@@ -690,9 +691,11 @@ const instanceOptions = {
     id: 'accordion-example',
     override: true
 };
+```
 
 Create a new Accordion object using the options set above as the parameters.
 
+```javascript
 import { Accordion } from 'flowbite';
 
 /*
@@ -702,9 +705,11 @@ import { Accordion } from 'flowbite';
 * instanceOptions (optional)
 */
 const accordion = new Accordion(accordionElement, accordionItems, options, instanceOptions);
+```
 
 Now you can access the object methods to programmatically open, close, and toggle the accordion items based on the unique identifier.
 
+```javascript
 // open accordion item based on id
 accordion.open('accordion-example-heading-2');
 
@@ -713,11 +718,13 @@ accordion.close('accordion-example-heading-2');
 
 // toggle visibility of item based on id
 accordion.toggle('accordion-example-heading-3');
+```
 
 ### HTML Markup
 
 Use the following HTML markup example for the JavaScript script above.
 
+```html
 <div id="accordion-example">
   <h2 id="accordion-example-heading-1">
     <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-body border border-b-0 border-default rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800" aria-expanded="true" aria-controls="accordion-example-body-1">
@@ -761,6 +768,7 @@ Use the following HTML markup example for the JavaScript script above.
     </div>
   </div>
 </div>
+```
 
 ### TypeScript
 
@@ -768,6 +776,7 @@ If you're using the <a href="/docs/getting-started/typescript">TypeScript config
 
 Here's an example that applies the types from Flowbite to the code above:
 
+```typescript
 import { Accordion } from "flowbite";
 import type { AccordionOptions, AccordionItem, AccordionInterface } from "flowbite";
 import type { InstanceOptions } from 'flowbite';
@@ -837,3 +846,4 @@ accordion.destroy();
 
 // re-initialize accordion
 accordion.init();
+```

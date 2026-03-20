@@ -940,6 +940,7 @@ Check out the following examples to learn how to create a new InputCounter objec
 
 First of all, you need to set the object parameters where the target element is required and the other two are optional.
 
+```javascript
 // set the target element of the input field
 const $targetEl = document.getElementById('counter-input-example');
 
@@ -964,9 +965,11 @@ const instanceOptions = {
   id: 'counter-input-example',
   override: true
 };
+```
 
 Next step is to create a new instance of a InputCounter object using the parameters we have set above.
 
+```javascript
 import { InputCounter } from 'flowbite';
 
 /*
@@ -976,9 +979,11 @@ import { InputCounter } from 'flowbite';
  * options: optional
  */
 const counterInput = new InputCounter($targetEl, $incrementEl, $decrementEl, options, instanceOptions);
+```
 
 Now you can programmatically increment or decrement the input field using the methods of the InputCounter object.
 
+```javascript
 // get the current value of the input field
 counterInput.getCurrentValue();
 
@@ -987,11 +992,13 @@ counterInput.increment();
 
 // decrement the value of the input field
 counterInput.decrement();
+```
 
 ### HTML Markup
 
 Here is an example of the HTML markup that you can use for the JavaScript example above.
 
+```html
 <form class="max-w-xs mx-auto">
     <label for="counter-input-example" class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Choose quantity:</label>
     <div class="relative flex items-center">
@@ -1008,6 +1015,7 @@ Here is an example of the HTML markup that you can use for the JavaScript exampl
         </button>
     </div>
 </form>
+```
 
 ### TypeScript
 
@@ -1015,6 +1023,7 @@ If you're using the <a href="/docs/getting-started/typescript">TypeScript config
 
 Here's an example that applies the types from Flowbite to the code above:
 
+```typescript
 import { InputCounter } from 'flowbite';
 import type { InputCounterOptions, InputCounterInterface } from 'flowbite';
 import type { InstanceOptions } from 'flowbite';
@@ -1065,3 +1074,4 @@ counterInput.increment();
 
 // decrement the value of the input field
 counterInput.decrement();
+```
