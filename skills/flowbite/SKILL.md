@@ -7,11 +7,35 @@ description: "Flowbite UI component library index and overview. Use this skill t
 
 Flowbite is a free and open-source UI component library built on top of Tailwind CSS. It provides ready-to-use HTML components with data attributes to enable interactive elements for building modern, responsive websites.
 
+## Prerequisites
+
+Before outputting any Flowbite component code, verify the project has Flowbite configured. Check for the Flowbite plugin in the project's Tailwind CSS config (usually `tailwind.config.js`, `tailwind.config.ts`, or a `@plugin` directive in the main CSS file).
+
+**What to look for:**
+
+Tailwind CSS v4 (CSS-based config):
+```css
+@plugin "flowbite/plugin";
+```
+
+Tailwind CSS v3 (JS-based config):
+```js
+plugins: [require('flowbite/plugin')]
+```
+
+**If Flowbite is not configured**, guide the user through setup before outputting component code:
+1. Install: `npm install flowbite`
+2. Add the plugin to their Tailwind config (see above)
+3. For interactive components, include the JS: add `<script src="../path/to/flowbite/dist/flowbite.min.js"></script>` or `import 'flowbite';` in their entry point
+
+**Why this matters:** Flowbite v4 uses semantic theme classes (`bg-neutral-primary`, `text-heading`, `border-default`, `bg-brand`, `rounded-base`, etc.) that only resolve when the Flowbite plugin is active. Without it, these classes produce no styles.
+
 ## Key Concepts
 
 - **Tailwind CSS based**: All components use Tailwind utility classes for styling
+- **Semantic theme classes**: Flowbite v4 uses semantic tokens (`text-heading`, `bg-brand`, `border-default`) instead of raw Tailwind colors (`text-gray-900`, `bg-blue-700`)
 - **Data attributes**: Interactive components use `data-*` attributes (e.g., `data-modal-toggle`, `data-dropdown-toggle`) — no manual JS initialization needed
-- **Dark mode**: Components support dark mode via Tailwind's `dark:` prefix
+- **Dark mode**: Components support dark mode via Tailwind's `dark:` prefix and semantic tokens automatically adapt
 - **Responsive**: Components are mobile-first and responsive by default
 
 ## Component Directory
