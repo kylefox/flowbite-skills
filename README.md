@@ -8,17 +8,17 @@ Built from Flowbite v4.0.1 source documentation.
 
 ```bash
 # Install all skills
-npx skills add your-username/flowbite-skills --skill '*'
+npx skills add kylefox/flowbite-skills --skill '*'
 
 # Install specific skills
-npx skills add your-username/flowbite-skills --skill flowbite-modal
-npx skills add your-username/flowbite-skills --skill flowbite-navbar
+npx skills add kylefox/flowbite-skills --skill flowbite-modal
+npx skills add kylefox/flowbite-skills --skill flowbite-navbar
 ```
 
 Install the **index skill** for general Flowbite guidance and component discovery:
 
 ```bash
-npx skills add your-username/flowbite-skills --skill flowbite
+npx skills add kylefox/flowbite-skills --skill flowbite
 ```
 
 ## Skills
